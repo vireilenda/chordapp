@@ -87,6 +87,9 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/bt5Chd" />
 
+
+
+
     <Button
         android:id="@+id/btnWrite"
         android:layout_width="wrap_content"
@@ -120,9 +123,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CONFIGURAÇÃO DE ACORDES"
-        android:textSize="24dp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnCheck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/bt6Chd" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="KEYBOARD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt6Chd" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="PIANO"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt6Chd" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/bt6Chd"
+         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.chordapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,15 +10,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Switch
 import android.widget.Toast
 import com.example.chordapp.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-import kotlinx.android.synthetic.main.activity_main2.*
+import kotlinx.android.synthetic.main.activity_save.*
 
 
 @ExperimentalStdlibApi
-class MainActivity2 : AppCompatActivity() {
+class SaveActivity : AppCompatActivity() {
 
     private lateinit var acorde01: String
     private lateinit var acorde02: String
@@ -25,20 +27,19 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var acorde04: String
     private lateinit var acorde05: String
     private lateinit var acorde06: String
+    private lateinit var songtype: String
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_save)
 
 
         btnWrite.setOnClickListener {
-            writeFile()
             writeFiles()
              }
         btnCheck.setOnClickListener {
-            checkFile()
-            readFiles()
-        }
+            checkFiles()
+            }
 
 
         val btpl = findViewById<Button>(R.id.btnPlay)
@@ -51,24 +52,22 @@ class MainActivity2 : AppCompatActivity() {
 
             val textbtn1 = acorde01
             val textbtn2 = acorde02
-            val textbtn3 = bt3Chd.text.toString()
-            val textbtn4 = bt4Chd.text.toString()
-            val textbtn5 = bt5Chd.text.toString()
-            val textbtn6 = bt6Chd.text.toString()
+            val textbtn3 = acorde03
+            val textbtn4 = acorde04
+            val textbtn5 = acorde05
+            val textbtn6 = acorde06
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("my_name1", textbtn1)
-            intent.putExtra("my_name2", textbtn2)
+            intent.putExtra("my_name1", acorde01)
+            intent.putExtra("my_name2", acorde02)
             intent.putExtra("my_name3", textbtn3)
             intent.putExtra("my_name4", textbtn4)
             intent.putExtra("my_name5", textbtn5)
             intent.putExtra("my_name6", textbtn6)
 
+            intent.putExtra("song_type", songtype)
+
             startActivity(intent)
         }
-
-
-
-
 
     }
 
@@ -83,6 +82,27 @@ class MainActivity2 : AppCompatActivity() {
         openFileOutput(key2, Context.MODE_PRIVATE).use {
             it.write(bt2Chd.text.toString().toByteArray())
         }
+
+        val key3 = "mykey3"
+        openFileOutput(key3, Context.MODE_PRIVATE).use {
+            it.write(bt3Chd.text.toString().toByteArray())
+        }
+
+        val key4 = "mykey4"
+        openFileOutput(key4, Context.MODE_PRIVATE).use {
+            it.write(bt4Chd.text.toString().toByteArray())
+        }
+
+        val key5 = "mykey5"
+        openFileOutput(key5, Context.MODE_PRIVATE).use {
+            it.write(bt5Chd.text.toString().toByteArray())
+        }
+
+        val key6 = "mykey6"
+        openFileOutput(key6, Context.MODE_PRIVATE).use {
+            it.write(bt6Chd.text.toString().toByteArray())
+        }
+
     }
 
 private fun readFiles(){
@@ -95,81 +115,44 @@ private fun readFiles(){
         acorde02 = it.readBytes().decodeToString()
     }
 
+    val key3 = "mykey3"
+    openFileInput(key3).use{
+        acorde03 = it.readBytes().decodeToString()
+    }
 
+    val key4 = "mykey4"
+    openFileInput(key4).use{
+        acorde04 = it.readBytes().decodeToString()
+    }
+
+    val key5 = "mykey5"
+    openFileInput(key5).use{
+        acorde05 = it.readBytes().decodeToString()
+    }
+
+    val key6 = "mykey6"
+    openFileInput(key6).use{
+        acorde06 = it.readBytes().decodeToString()
+    }
+
+    val readswitch = findViewById<Switch>(R.id.switch2)
+
+    if (readswitch.isChecked == true){
+        songtype = "keyboard"
+        }
+    else{
+        songtype= "piano"
+    }
 
 }
 
 
-
-
-    private fun writeFile() {
-        try {
-            openFileOutput(FILE_NAME, MODE_PRIVATE).use {
-//                var k1chd1 = bt1Chd.text.toString()
-//                 if(k1chd1!=""){
-//                    if (searchChord(k1chd1)==false){
-//                        k1chd1 = ""
-//                        }
-//                }
-
-//                var k1chd2 = bt2Chd.text.toString()
-//                if(k1chd2!="") {
-//                    if (searchChord(k1chd2) == false) {
-//                        k1chd2 = ""
-//                    }
-//                }
-
-                var k1chd3 = bt3Chd.text.toString()
-                if(k1chd3!="") {
-                    if (searchChord(k1chd3) == false) {
-                        k1chd3 = ""
-                    }
-                }
-
-                var k1chd4 = bt4Chd.text.toString()
-                if(k1chd4!="") {
-                    if (searchChord(k1chd4) == false) {
-                        k1chd4 = ""
-                    }
-                }
-
-                var k1chd5 = bt5Chd.text.toString()
-                if(k1chd5!="") {
-                    if (searchChord(k1chd5) == false) {
-                        k1chd5 = ""
-                    }
-                }
-
-                var k1chd6 = bt6Chd.text.toString()
-                if(k1chd6!="") {
-                    if (searchChord(k1chd6) == false) {
-                        k1chd6 = ""
-                    }
-                }
-
-                val result = "$k1chd3, $k1chd4, $k1chd5, $k1chd6"
-                it.write(result.toByteArray())
-                Toast.makeText(applicationContext, "SAVE", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Error", e)
-
-
-        }
+    private fun checkFiles(){
+        readFiles()
+    txt1.text = "Os Acodes são: $acorde01, $acorde02, $acorde03, $acorde04, $acorde05, $acorde06"
     }
 
 
-
-    private fun checkFile() {
-        try {
-            openFileInput(FILE_NAME).use {
-                val result = it.readBytes().decodeToString()
-                txt1.text = result
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Error", e)
-        }
-    }
 
      private fun searchChord(toFind: String): Boolean {
 
@@ -194,7 +177,7 @@ private fun readFiles(){
     }
 
     companion object {
-        const val TAG = "MainActivity2"
+        const val TAG = "SaveActivity"
         const val FILE_NAME = "my_file"
         const val K1CHD = "k1chd"
         const val K2CHD = "k2chd"
