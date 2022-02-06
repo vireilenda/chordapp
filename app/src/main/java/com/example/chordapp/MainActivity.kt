@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         button4.text = chordbtn4
         button5.text = chordbtn5
         button6.text = chordbtn6
+        textView.text = songChoice
 
         val song1 = findViewById<Button>(R.id.button1)
         val song2 = findViewById<Button>(R.id.button2)
@@ -107,8 +108,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
+
     private fun sounds(){
-        if (checkSound == "keyboard")
+        if (checkSound == "piano")
         {
                 c4 = soundPool.load(this, R.raw.c4, 1)
                 c4Black = soundPool.load(this, R.raw.c4black, 1)
