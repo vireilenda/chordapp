@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Chord App</string>
+    <string name="settings">Settings</string>
+    <string name="help">help</string>
+    <string name="play">Play</string>
 
-  </resources>
+
+</resources>

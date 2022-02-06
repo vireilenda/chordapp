@@ -8,6 +8,8 @@ import android.icu.text.StringSearch
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
@@ -21,18 +23,19 @@ import kotlinx.android.synthetic.main.activity_save.*
 @ExperimentalStdlibApi
 class SaveActivity : AppCompatActivity() {
 
-    private lateinit var acorde01: String
-    private lateinit var acorde02: String
-    private lateinit var acorde03: String
-    private lateinit var acorde04: String
-    private lateinit var acorde05: String
-    private lateinit var acorde06: String
-    private lateinit var songtype: String
+    //private lateinit var acorde02: String
 
-     override fun onCreate(savedInstanceState: Bundle?) {
+    private var acorde01: String? = null
+    private var acorde02: String? = null
+    private var acorde03: String? = null
+    private var acorde04: String? = null
+    private var acorde05: String? = null
+    private var acorde06: String? = null
+    private var songtype: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_save)
-
 
         btnWrite.setOnClickListener {
             writeFiles()
@@ -40,7 +43,6 @@ class SaveActivity : AppCompatActivity() {
         btnCheck.setOnClickListener {
             checkFiles()
             }
-
 
         playFiles()
 
@@ -64,8 +66,6 @@ class SaveActivity : AppCompatActivity() {
         }
 
     }
-
-
 
     private fun writeFiles(){
         val key1 = "mykey1"
@@ -101,40 +101,65 @@ class SaveActivity : AppCompatActivity() {
     }
 
 private fun readFiles(){
-    val key1 = "mykey1"
-    openFileInput(key1).use{
-       acorde01 = it.readBytes().decodeToString()
-       if(searchChord(acorde01)==false) acorde01 = ""
+
+    try {
+        val key1 = "mykey1"
+        openFileInput(key1).use {
+            acorde01 = it.readBytes().decodeToString()
+            if (searchChord(acorde01!!) == false) acorde01 = ""
+        }
     }
+    catch (e : Exception){acorde01 = ""}
+
+
+
+try{
     val key2 = "mykey2"
     openFileInput(key2).use{
-       acorde02 = it.readBytes().decodeToString()
-        if(searchChord(acorde02)==false) acorde02 = ""
+        acorde02 = it.readBytes().decodeToString()
+        if(searchChord(acorde02!!)==false) acorde02 = ""
     }
+}
+catch (e : Exception){acorde02 = ""}
 
+
+try {
     val key3 = "mykey3"
     openFileInput(key3).use{
         acorde03 = it.readBytes().decodeToString()
-        if(searchChord(acorde03)==false) acorde03 = ""
+        if(searchChord(acorde03!!)==false) acorde03 = ""
     }
+}
+catch (e : Exception){acorde03 = ""}
 
-    val key4 = "mykey4"
-    openFileInput(key4).use{
-        acorde04 = it.readBytes().decodeToString()
-        if(searchChord(acorde04)==false) acorde04 = ""
+    try{
+        val key4 = "mykey4"
+        openFileInput(key4).use{
+            acorde04 = it.readBytes().decodeToString()
+            if(searchChord(acorde04!!)==false) acorde04 = ""
+        }
     }
+    catch (e : Exception){acorde04 = ""}
 
-    val key5 = "mykey5"
-    openFileInput(key5).use{
-        acorde05 = it.readBytes().decodeToString()
-        if(searchChord(acorde05)==false) acorde05 = ""
+    try{
+        val key5 = "mykey5"
+        openFileInput(key5).use{
+            acorde05 = it.readBytes().decodeToString()
+            if(searchChord(acorde05!!)==false) acorde05 = ""
+        }
     }
+    catch (e : Exception){acorde05 = ""}
 
-    val key6 = "mykey6"
-    openFileInput(key6).use{
-        acorde06 = it.readBytes().decodeToString()
-        if(searchChord(acorde06)==false) acorde06 = ""
+
+    try{
+        val key6 = "mykey6"
+        openFileInput(key6).use{
+            acorde06 = it.readBytes().decodeToString()
+            if(searchChord(acorde06!!)==false) acorde06 = ""
+        }
     }
+    catch (e : Exception){acorde06 = ""}
+
 
     val readswitch = findViewById<Switch>(R.id.switch2)
 
@@ -187,6 +212,21 @@ private fun readFiles(){
         const val K5CHD = "k5chd"
         const val K6CHD = "k6chd"
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_settings, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.help_item) {
+            val intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent)
+        }
+        return true
+    }
+
+
 
 
 }

@@ -225,9 +225,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SaveActivity::class.java)
             startActivity(intent)
         }
+        if (item.itemId == R.id.help_item) {
+            val intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent)
+        }
         return true
     }
-
 
 }
 
