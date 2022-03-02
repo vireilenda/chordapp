@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/purple_700"
+    tools:context=".SaveActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
@@ -16,147 +17,348 @@
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
-    <EditText
-        android:id="@+id/bt1Chd"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/titleChord"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Write B1 chord here"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/bt2Chd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Write B2 chord here"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/bt1Chd" />
-
-
-    <EditText
-        android:id="@+id/bt3Chd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Write B3 chord here"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/bt2Chd" />
-
-    <EditText
-        android:id="@+id/bt4Chd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Write B4 chord here"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/bt3Chd" />
-
-    <EditText
-        android:id="@+id/bt5Chd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Write B5 chord here"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/bt4Chd" />
-
-    <EditText
-        android:id="@+id/bt6Chd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Write B6 chord here"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/bt5Chd" />
-
-
-
-
-    <Button
-        android:id="@+id/btnWrite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SAVE"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <Button
-        android:id="@+id/btnCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CHECK"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        />
-
-    <Button
-        android:id="@+id/btnPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PLAY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        />
-
-    <TextView
-        android:id="@+id/txt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CONFIGURAÇÃO DE ACORDES"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCheck"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/bt6Chd" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:background="@color/purple_700"
         android:layout_margin="32dp"
-        android:textSize="16dp"
-        android:text="KEYBOARD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt6Chd" />
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="CONFIGURAÇÃO DE ACORDES"
+            android:textSize="20dp"
+
+            />
+    </LinearLayout>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tabSelect"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginTop="16dp"
-        android:layout_margin="32dp"
-        android:textSize="16dp"
-        android:text="PIANO"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt6Chd" />
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/titleChord">
 
-    <Switch
-        android:id="@+id/switch2"
-        android:layout_width="wrap_content"
+        <TableRow>
+            <TextView
+                android:id="@+id/textTitle1"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:ems="8"
+                android:gravity="center"
+                android:textColor="@color/purple_700"
+                android:text="CHORD SAVED"
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/textTitle2"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:ems="8"
+                android:gravity="center"
+                android:textColor="@color/purple_700"
+                android:text="NEW CHORD"
+                android:textSize="16dp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textChord1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/gray"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord" />
+
+            <EditText
+                android:id="@+id/bt1Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:ems="7"
+                android:hint="Write chord" />
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+
+                android:id="@+id/textChord2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord"
+                />
+
+            <EditText
+                android:id="@+id/bt2Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:ems="7"
+                android:hint="Write chord" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textChord3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord"
+                />
+
+            <EditText
+                android:id="@+id/bt3Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:ems="7"
+                android:hint="Write chord"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textChord4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord"
+                />
+            <EditText
+                android:id="@+id/bt4Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:ems="7"
+                android:hint="Write chord"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textChord5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord"
+                />
+
+            <EditText
+                android:id="@+id/bt5Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:ems="7"
+                android:hint="Write chord"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textChord6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord"
+                />
+
+            <EditText
+                android:id="@+id/bt6Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:ems="7"
+                android:hint="Write chord"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textChord7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord"
+                />
+
+            <EditText
+                android:id="@+id/bt7Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:ems="8"
+                android:hint="Write chord"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textChord8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:ems="8"
+                android:textSize="16dp"
+                android:text="Chord"
+                />
+
+            <EditText
+                android:id="@+id/bt8Chd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:ems="8"
+                android:hint="Write chord"
+                />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tabSelectSound"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:stretchColumns="1"
+        android:layout_margin="32dp"
+        android:background="@color/purple_700"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/tabSelect"
+        app:layout_constraintBottom_toTopOf="@id/tabButton">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:text="KEYBOARD"
+                />
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginRight="16dp"
+                android:textSize="16dp"
+                android:text="PIANO"
+                />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tabButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/bt6Chd" />
+        android:stretchColumns="1"
+        android:layout_margin="32dp"
+        android:background="@color/purple_700"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TableRow>
+            <Button
+                android:id="@+id/btnWrite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAVE"
+                />
+            <Button
+                android:id="@+id/btnCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHECK"
+                />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PLAY"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,23 +1,16 @@
 package com.example.chordapp
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.SoundPool
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
-import android.widget.Button
 import android.view.MenuItem
-import android.view.MotionEvent
-import android.widget.Switch
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import kotlinx.android.synthetic.main.activity_play.*
 
-
-@ExperimentalStdlibApi
-class MainActivity : AppCompatActivity() {
+class PlayActivity:AppCompatActivity() {
 
     private var c4 = 0
     private  var c4Black:Int = 0
@@ -45,16 +38,21 @@ class MainActivity : AppCompatActivity() {
     private  var b5:Int = 0
 
 
-    private lateinit var soundPool:SoundPool
+    private lateinit var soundPool: SoundPool
+
+
     private lateinit var checkSound:String
 
-    @SuppressLint("ClickableViewAccessibility")
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_play)
 
-        soundPool=SoundPool.Builder().setMaxStreams(8).build()
+        soundPool=SoundPool.Builder().setMaxStreams(9).build()
+        // getting the recyclerview by its id
+        val recyclerview = findViewById<RecyclerView>(R.id.recyclerview)
+        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+
 
         val chordbtn1: String = intent.getStringExtra("my_name1").toString()
         val chordbtn2: String = intent.getStringExtra("my_name2").toString()
@@ -62,82 +60,109 @@ class MainActivity : AppCompatActivity() {
         val chordbtn4: String = intent.getStringExtra("my_name4").toString()
         val chordbtn5: String = intent.getStringExtra("my_name5").toString()
         val chordbtn6: String = intent.getStringExtra("my_name6").toString()
+        val chordbtn7: String = intent.getStringExtra("my_name7").toString()
+        val chordbtn8: String = intent.getStringExtra("my_name8").toString()
         val songChoice:String = intent.getStringExtra("song_type").toString()
         checkSound=songChoice
 
-        button1.text = chordbtn1
-        button2.text = chordbtn2
-        button3.text = chordbtn3
-        button4.text = chordbtn4
-        button5.text = chordbtn5
-        button6.text = chordbtn6
-        textView.text = songChoice
+ 
+        textView10.text = songChoice
 
-        val song1 = findViewById<Button>(R.id.button1)
-        val song2 = findViewById<Button>(R.id.button2)
-        val song3 = findViewById<Button>(R.id.button3)
-        val song4 = findViewById<Button>(R.id.button4)
-        val song5 = findViewById<Button>(R.id.button5)
-        val song6 = findViewById<Button>(R.id.button6)
+        // this creates a vertical layout Manager
+        //recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.layoutManager = layoutManager
+
+
+
+        // ArrayList of class ItemsViewModel
+        val data = ArrayList<ItemsViewModel>()
+
+        // This loop will create 5 Views containing
+//        for (i in 1..5) {
+//            data.add(ItemsViewModel("B" + i ))
+//        }
+
+        if (chordbtn1 != ""){
+            data.add(ItemsViewModel(chordbtn1))
+        }
+        if (chordbtn2 != ""){
+            data.add(ItemsViewModel(chordbtn2))
+        }
+        if (chordbtn3 != ""){
+            data.add(ItemsViewModel(chordbtn3))
+        }
+        if (chordbtn4 != ""){
+            data.add(ItemsViewModel(chordbtn4))
+        }
+        if (chordbtn5 != ""){
+            data.add(ItemsViewModel(chordbtn5))
+        }
+        if (chordbtn6 != ""){
+            data.add(ItemsViewModel(chordbtn6))
+        }
+
+        if (chordbtn7 != ""){
+            data.add(ItemsViewModel(chordbtn7))
+        }
+        if (chordbtn8 != ""){
+            data.add(ItemsViewModel(chordbtn8))
+        }
 
         sounds()
 
-        song1.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){MotionEvent.ACTION_DOWN -> selectButtonChord(chordbtn1)}
-            return@OnTouchListener true
-        })
-        song2.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){MotionEvent.ACTION_DOWN -> selectButtonChord(chordbtn2)}
-            return@OnTouchListener true
-        })
-        song3.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){MotionEvent.ACTION_DOWN -> selectButtonChord(chordbtn3)}
-            return@OnTouchListener true
-        })
-        song4.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){MotionEvent.ACTION_DOWN -> selectButtonChord(chordbtn4)}
-            return@OnTouchListener true
-        })
-        song5.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){MotionEvent.ACTION_DOWN -> selectButtonChord(chordbtn5)}
-            return@OnTouchListener true
-        })
-        song6.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){MotionEvent.ACTION_DOWN -> selectButtonChord(chordbtn6)}
-            return@OnTouchListener true
-        })
+        // This will pass the ArrayList to our Adapter
+        val adapter = CustomAdapter(data)
+
+        // Setting the Adapter with the recyclerview
+
+        recyclerview.adapter = adapter
+
+
+        //adapter.setOnItemClickListener(object : CustomAdapter.onItemClickListenerTest {
+        adapter.setOnItemTouchListener(object : CustomAdapter.onItemTouchListener {
+           //override fun itemClickTest(position: Int) {
+            override fun itemTouchTest(position: Int) {
+                     //Toast.makeText(applicationContext, "botão $position", Toast.LENGTH_SHORT).show()
+                    selectButtonChord(data[position].text)
+                    }
+                 }
+            )
+
+
     }
 
 
 
+//teste para levar as funções para o reclicleview
+
     private fun sounds(){
         if (checkSound == "piano")
         {
-                c4 = soundPool.load(this, R.raw.c4, 1)
-                c4Black = soundPool.load(this, R.raw.c4black, 1)
-                e4 = soundPool.load(this, R.raw.e4, 1)
-                f4 = soundPool.load(this, R.raw.f4, 1)
-                f4Black = soundPool.load(this, R.raw.f4black, 1)
-                g4 = soundPool.load(this, R.raw.g4, 1)
-                g4Black = soundPool.load(this, R.raw.g4black, 1)
-                d4 = soundPool.load(this, R.raw.d4, 1)
-                d4Black = soundPool.load(this, R.raw.d4black, 1)
-                a4 = soundPool.load(this, R.raw.a4, 1)
-                a4Black = soundPool.load(this, R.raw.a4black, 1)
-                b4 = soundPool.load(this, R.raw.b4, 1)
+            c4 = soundPool.load(this, R.raw.c4, 1)
+            c4Black = soundPool.load(this, R.raw.c4black, 1)
+            e4 = soundPool.load(this, R.raw.e4, 1)
+            f4 = soundPool.load(this, R.raw.f4, 1)
+            f4Black = soundPool.load(this, R.raw.f4black, 1)
+            g4 = soundPool.load(this, R.raw.g4, 1)
+            g4Black = soundPool.load(this, R.raw.g4black, 1)
+            d4 = soundPool.load(this, R.raw.d4, 1)
+            d4Black = soundPool.load(this, R.raw.d4black, 1)
+            a4 = soundPool.load(this, R.raw.a4, 1)
+            a4Black = soundPool.load(this, R.raw.a4black, 1)
+            b4 = soundPool.load(this, R.raw.b4, 1)
 
-                c5 = soundPool.load(this, R.raw.c5, 1)
-                c5Black = soundPool.load(this, R.raw.c5black, 1)
-                e5 = soundPool.load(this, R.raw.e5, 1)
-                f5 = soundPool.load(this, R.raw.f5, 1)
-                f5Black = soundPool.load(this, R.raw.f5black, 1)
-                g5 = soundPool.load(this, R.raw.g5, 1)
-                g5Black = soundPool.load(this, R.raw.g5black, 1)
-                d5 = soundPool.load(this, R.raw.d5, 1)
-                d5Black = soundPool.load(this, R.raw.d5black, 1)
-                a5 = soundPool.load(this, R.raw.a5, 1)
-                a5Black = soundPool.load(this, R.raw.a5black, 1)
-                b5 = soundPool.load(this, R.raw.b5, 1)
+            c5 = soundPool.load(this, R.raw.c5, 1)
+            c5Black = soundPool.load(this, R.raw.c5black, 1)
+            e5 = soundPool.load(this, R.raw.e5, 1)
+            f5 = soundPool.load(this, R.raw.f5, 1)
+            f5Black = soundPool.load(this, R.raw.f5black, 1)
+            g5 = soundPool.load(this, R.raw.g5, 1)
+            g5Black = soundPool.load(this, R.raw.g5black, 1)
+            d5 = soundPool.load(this, R.raw.d5, 1)
+            d5Black = soundPool.load(this, R.raw.d5black, 1)
+            a5 = soundPool.load(this, R.raw.a5, 1)
+            a5Black = soundPool.load(this, R.raw.a5black, 1)
+            b5 = soundPool.load(this, R.raw.b5, 1)
         }
         else{
             c4 = soundPool.load(this, R.raw.kc4, 1)
@@ -170,7 +195,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun selectButtonChord(nameChord:String) {
 
-       when (nameChord) {
+        when (nameChord) {
             "C"   -> playChord(c4,e4,g4)
             "Cm"  -> playChord(c4,d4Black,g4)
             "C#"  -> playChord(c4Black,f4,g4Black)
@@ -205,7 +230,7 @@ class MainActivity : AppCompatActivity() {
             "Bbm" -> playChord(a4Black,c5Black,f5)
             "B"   -> playChord(b4,d5Black,f5Black)
             "Bm"  ->playChord(b4,d5,f5Black)
-            }
+        }
 
     }
 
@@ -215,11 +240,20 @@ class MainActivity : AppCompatActivity() {
         soundPool.play(note3, 1f, 1f, 0, 0, 1f)
     }
 
+
+
+//fim do teste
+
+
+
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_settings, menu)
         return true
     }
 
+    @ExperimentalStdlibApi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.setting_item) {
             val intent = Intent(this, SaveActivity::class.java)
@@ -232,20 +266,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
