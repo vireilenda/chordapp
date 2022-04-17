@@ -8,8 +8,8 @@
     <string name="helpLine2">Na aba Settings, escreva os acordes nas linhas correspondentes a cada botão</string>
     <string name="helpLine3">Exemplo de acordes válidos: C, Am, F#m, Bb (acordes maiores ou menores)</string>
     <string name="helpLine4">Salve os acordes no botão SAVE</string>
-    <string name="helpLine5">Escolha o tipo de som que será tocado no switch abaixo das linhas de configuração dos acorde, podendo ser um som de piano ou de teclado</string>
-    <string name="helpLine6">Verifique os acordes salvos como botão CHECK. O app irá informar caso um ou mais acordes inseridos não estão no seu banco de dados</string>
+    <string name="helpLine5">O app irá informar caso um ou mais acordes inseridos não estão no seu banco de dados</string>
+    <string name="helpLine6">Escolha o tipo de som que será tocado no switch abaixo das linhas de configuração dos acorde, podendo ser um som de piano ou de teclado</string>
     <string name="helpLine7">Vá para a tela de tocar com a configuração salva com o botão PLAY</string>
     <string name="helpEnd">Divirta-se!</string>
 

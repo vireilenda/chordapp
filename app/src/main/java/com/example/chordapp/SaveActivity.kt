@@ -36,10 +36,11 @@ class SaveActivity : AppCompatActivity() {
 
         btnWrite.setOnClickListener {
             writeFiles()
+            readFiles()
              }
-        btnCheck.setOnClickListener {
-            checkFiles()
-            }
+      //  btnCheck.setOnClickListener {
+            //checkFiles()
+       //     }
 
         val btpl2 = findViewById<Button>(R.id.button)
         btpl2.setOnClickListener {
